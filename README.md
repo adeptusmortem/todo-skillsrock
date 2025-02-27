@@ -67,8 +67,8 @@ CREATE TABLE tasks (
     "title": "Новая задача", 
     "description": "Описание задачи", 
     "status": "new", 
-    "created\_at": "2023-10-01T12:00:00Z", 
-    "updated\_at": "2023-10-01T12:00:00Z"
+    "created_at": "2023-10-01T12:00:00Z", 
+    "updated_at": "2023-10-01T12:00:00Z"
 }
 ```
 
@@ -211,6 +211,7 @@ go mod download
     
 3.  **Запуск сервера**
 ```bash
+cd cmd
 go run main.go
 ```
     
