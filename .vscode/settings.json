@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "dpg-cuvkme2j1k6c73ee3930-a",
+            "driver": "PostgreSQL",
+            "name": "skillrock",
+            "group": "testcase",
+            "connectString": "postgresql://admin:ZUOsPmitf42g44NcXTUvHzSzkpxjfl9Y@dpg-cuvkme2j1k6c73ee3930-a.singapore-postgres.render.com/tasks_db_zr62"
+        }
+    ]
+}

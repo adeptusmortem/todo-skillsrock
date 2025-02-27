@@ -77,6 +77,8 @@ func UpdateTask(c *fiber.Ctx) error {
 	}
 
 	task.ID, _ = strconv.Atoi(c.Params("id"))
+	task.Updated_at = time.Now()
+	
 	result := database.DB.Save(&task)
 	if result.Error != nil {
 		log.Printf("err 500: %v", result.Error)
