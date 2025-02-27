@@ -11,7 +11,7 @@ import (
 func main() {
 
 	// Connect to DB
-	if err := database.Connect("postgresql://admin:ZUOsPmitf42g44NcXTUvHzSzkpxjfl9Y@dpg-cuvkme2j1k6c73ee3930-a.singapore-postgres.render.com/tasks_db_zr62"); err != nil {
+	if err := database.Connect("path_to_db"); err != nil {
 		log.Fatalf("Error on conecting to DB: %v", err)
 	}
 
