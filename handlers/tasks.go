@@ -16,7 +16,9 @@ func CreateTask(c *fiber.Ctx) error {
 
 	if err := c.BodyParser(&task); err != nil {
 		log.Printf("error 400: %v", err)
-		return c.Status(400).SendString("Bad Request")
+		return c.Status(400).JSON(fiber.Map{
+            "error": "Bad Request",
+        })
 	}
 
 	task.Created_at = time.Now()
@@ -25,10 +27,12 @@ func CreateTask(c *fiber.Ctx) error {
 	result := database.DB.Create(&task)
 	if result.Error != nil {
 		log.Printf("error 500: %v", result.Error)
-		return c.Status(500).SendString("Internal Server Error")
+		return c.Status(500).JSON(fiber.Map{
+            "error": "Internal Server Error",
+        })
 	}
 
-	return c.Status(201).SendString("Succefully created!")
+	return c.Status(201).JSON(task)
 }
 
 // Get specific task by id
@@ -38,7 +42,9 @@ func GetTask(c *fiber.Ctx) error {
 
 	if result.Error != nil {
 		log.Printf("err 404: %v", result.Error)
-		return c.Status(404).SendString("Not Found")
+		return c.Status(404).JSON(fiber.Map{
+            "error": "Not Found",
+        })
 	}
 
 	return c.JSON(task)
@@ -51,7 +57,9 @@ func GetTasks(c *fiber.Ctx) error {
 
 	if result.Error != nil {
 		log.Printf("err 404: %v", result.Error)
-		return c.Status(404).SendString("Not Found")
+		return c.Status(404).JSON(fiber.Map{
+            "error": "Not Found",
+        })
 	}
 
 	return c.JSON(tasks)
@@ -63,17 +71,21 @@ func UpdateTask(c *fiber.Ctx) error {
 	
 	if err := c.BodyParser(&task); err != nil {
 		log.Printf("err 400: %v", err)
-		return c.Status(400).SendString("Bad Request")
+		return c.Status(400).JSON(fiber.Map{
+            "error": "Bad Request",
+        })
 	}
 
 	task.ID, _ = strconv.Atoi(c.Params("id"))
 	result := database.DB.Save(&task)
 	if result.Error != nil {
 		log.Printf("err 500: %v", result.Error)
-		return c.Status(500).SendString("Internal Server Error")
+		return c.Status(500).JSON(fiber.Map{
+            "error": "Internal Server Error",
+        })
 	}
 
-	return c.Status(200).SendString("Succefully updated!")
+	return c.Status(200).JSON(task)
 }
 
 // Delete specific task
@@ -83,8 +95,12 @@ func DeleteTask(c *fiber.Ctx) error {
 
 	if result.Error != nil {
 		log.Printf("err 404: %v", result.Error)
-		return c.Status(404).SendString("Not Found")
+		return c.Status(404).JSON(fiber.Map{
+            "error": "Not Found",
+        })
 	}
 	
-	return c.Status(200).SendString("Succesfully deleted!")
+	return c.Status(200).JSON(fiber.Map{
+            "message": "Succesfully deleted!",
+        })
 }
